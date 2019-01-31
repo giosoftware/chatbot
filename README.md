@@ -2,4 +2,4 @@ The purpose of this test is to evaluate your research & development skills. To t
 This page must be hosted by you and publicly accessible. We recommend using Heroku, but you can choose the site/platform you prefer.
 
 Inbenta challenge online in:
-https://inbentayodabot.herokuapp.com/
+https://inbentachatbot.herokuapp.com/
