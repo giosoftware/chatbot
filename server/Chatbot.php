@@ -41,13 +41,14 @@ class Chatbot {
 		// Two consecutive "no results found"?
 		if (Conversation::getConsecutiveUnanswered($_SESSION['access_token'], $_SESSION['session_token']) > 1) {
 			$list = Swapi::getCharsList();
-			$randList = array_rand($list, 5);
-			foreach ($randList as $value) {
-    			$formattedCharList .= htmlspecialchars($value).', ';
-  			}
-  			$formattedCharList = rtrim($formattedCharList, ', ') . '.';
-
-			return $formattedCharList;
+			$randKeys = array_rand($list, 5);
+			$formattedList = 'I haven\'t any results, but here is a list of some Star Wars characters: '.
+				$list[$randKeys[0]].', '.
+				$list[$randKeys[1]].', '.
+				$list[$randKeys[2]].', '.
+				$list[$randKeys[3]].', '.
+				$list[$randKeys[4]].'.';
+			return $formattedList;
 		}
 		
 		return $res['message'];
