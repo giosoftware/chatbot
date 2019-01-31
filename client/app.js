@@ -53,7 +53,7 @@ new Vue({
             xhr.addEventListener("load", function () {
                 self.receiveMessage(xhr.responseText);
             });
-            xhr.open("POST", "/message.php");
+            xhr.open("POST", "message.php");
             xhr.setRequestHeader('Content-type', 'application/json')
             xhr.send(JSON.stringify({ "message": message }));
         },

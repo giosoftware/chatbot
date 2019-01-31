@@ -1,5 +1,5 @@
 <?php
-include __DIR__.'/ChatBot.php';
+include __DIR__.'/../server/ChatBot.php';
 
 // Get JSON message variable
 $message = json_decode(file_get_contents('php://input'))->message;
