@@ -38,28 +38,18 @@ class Chatbot {
 		// Send message
 		$res = Conversation::sendMessage($_SESSION['access_token'], $_SESSION['session_token'], $message);
 
-		// No results found?
-		if ($res['isNoResult']) {
-			if (!isset($_SESSION['noresult_count'])) {
-				$_SESSION['noresult_count'] = 0;
-			}
-			$_SESSION['noresult_count'] += 1;
-		} else {
-			$_SESSION['noresult_count'] = 0;
-		}
-
-		// 2 consecutive no_results?
-		if ($_SESSION['noresult_count'] >= 2) {
-			$_SESSION['noresult_count'] = 0;
+		// Two consecutive "no results found"?
+		if (Conversation::getConsecutiveUnanswered($_SESSION['access_token'], $_SESSION['session_token']) > 1) {
 			$list = Swapi::getCharsList();
-			$randKeys = array_rand($list, 3);
-			$formattedList = 'I haven\'t any results, but here is a list of some Star Wars characters: '.
-				$list[$randKeys[0]].', '.
-				$list[$randKeys[1]].', '.
-				$list[$randKeys[2]].'.';
-			return $formattedList;
-		}
+			$randList = array_rand($list, 5);
+			foreach ($randList as $value) {
+    			$formattedCharList .= htmlspecialchars($value).', ';
+  			}
+  			$formattedCharList = rtrim($formattedCharList, ', ') . '.';
 
+			return $formattedCharList;
+		}
+		
 		return $res['message'];
 	}
 }		
