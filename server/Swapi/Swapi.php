@@ -14,8 +14,8 @@ class Swapi {
   		array()
   	);
 
-  	$res = json_decode($result);
-  	return array_column($res->results, 'title');
+  	$res = json_decode($result, true);
+  	return array_column($res['results'], 'title');
   }
 
   public static function getCharsList() {
@@ -25,8 +25,8 @@ class Swapi {
   		array()
   	);
   	
-  	$res = json_decode($result);
-  	return array_column($res->results, 'name');
+  	$res = json_decode($result, true);
+  	return array_column($res['results'], 'name');
   }
 }
 
